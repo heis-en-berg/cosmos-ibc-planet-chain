@@ -4,6 +4,7 @@ package heisenberg.planet.blog;
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 // this line is used by starport scaffolding # 1
+import "blog/timedoutPost.proto";
 import "blog/sentPost.proto";
 import "blog/post.proto";
 
@@ -12,6 +13,17 @@ option go_package = "github.com/heis-en-berg/planet/x/blog/types";
 // Query defines the gRPC querier service.
 service Query {
     // this line is used by starport scaffolding # 2
+
+	// Queries a timedoutPost by id.
+	rpc TimedoutPost(QueryGetTimedoutPostRequest) returns (QueryGetTimedoutPostResponse) {
+		option (google.api.http).get = "/heis-en-berg/planet/blog/timedoutPost/{id}";
+	}
+
+	// Queries a list of timedoutPost items.
+	rpc TimedoutPostAll(QueryAllTimedoutPostRequest) returns (QueryAllTimedoutPostResponse) {
+		option (google.api.http).get = "/heis-en-berg/planet/blog/timedoutPost";
+	}
+
 
 	// Queries a sentPost by id.
 	rpc SentPost(QueryGetSentPostRequest) returns (QueryGetSentPostResponse) {
@@ -37,6 +49,22 @@ service Query {
 }
 
 // this line is used by starport scaffolding # 3
+message QueryGetTimedoutPostRequest {
+	uint64 id = 1;
+}
+
+message QueryGetTimedoutPostResponse {
+	TimedoutPost TimedoutPost = 1;
+}
+
+message QueryAllTimedoutPostRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllTimedoutPostResponse {
+	repeated TimedoutPost TimedoutPost = 1;
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
 message QueryGetSentPostRequest {
 	uint64 id = 1;
 }

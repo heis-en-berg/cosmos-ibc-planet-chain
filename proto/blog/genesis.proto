@@ -2,6 +2,7 @@ syntax = "proto3";
 package heisenberg.planet.blog;
 
 // this line is used by starport scaffolding # genesis/proto/import
+import "blog/timedoutPost.proto";
 import "blog/sentPost.proto";
 import "blog/post.proto";
 
@@ -10,6 +11,8 @@ option go_package = "github.com/heis-en-berg/planet/x/blog/types";
 // GenesisState defines the blog module's genesis state.
 message GenesisState {
     // this line is used by starport scaffolding # genesis/proto/state
+		repeated TimedoutPost timedoutPostList = 6; // this line is used by starport scaffolding # genesis/proto/stateField
+		uint64 timedoutPostCount = 7; // this line is used by starport scaffolding # genesis/proto/stateField
 		repeated SentPost sentPostList = 4; // this line is used by starport scaffolding # genesis/proto/stateField
 		uint64 sentPostCount = 5; // this line is used by starport scaffolding # genesis/proto/stateField
 		repeated Post postList = 2; // this line is used by starport scaffolding # genesis/proto/stateField
