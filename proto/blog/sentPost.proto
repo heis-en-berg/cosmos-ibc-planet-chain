@@ -8,7 +8,7 @@ import "gogoproto/gogo.proto";
 message SentPost {
   string creator = 1;
   uint64 id = 2;
-  string postId = 3; 
+  string postID = 3;
   string title = 4; 
   string chain = 5; 
 }
